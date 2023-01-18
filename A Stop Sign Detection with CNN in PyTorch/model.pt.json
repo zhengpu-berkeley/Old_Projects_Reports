@@ -1,0 +1,14 @@
+{
+    "epochs": 15,
+    "learningRate": 1e-06,
+    "momentum": 0.9,
+    "percentage used training": 0.9,
+    "learningRatescheduler": {
+        "lr_scheduler": true,
+        "base_lr": 0.001,
+        "max_lr": 0.01
+    },
+    "ready": true,
+    "filename": "model.pt",
+    "filesize": 44786445
+}
