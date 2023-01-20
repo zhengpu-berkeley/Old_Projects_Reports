@@ -1,0 +1,16 @@
+Package: ars
+Title: Adapative Rejection Sampling
+Version: 0.0.1
+Authors@R: 
+    as.person(c(
+    "Zhengpu Zhao <zhengpu@berkeley.edu> [aut, cre]", 
+    "William Hymer <will_hymer@berkeley.edu> [aut]",
+    "Dheeraj Prasanth <dheeraj_prasanth@berkeley.edu [aut]" ))
+Description: Performs adaptive rejection sampling on a given distribution.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

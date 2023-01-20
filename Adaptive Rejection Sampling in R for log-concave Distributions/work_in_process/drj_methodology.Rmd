@@ -1,0 +1,28 @@
+---
+title: "243_Project"
+author: "Zhengpu Zhao, William Hymer, Dheeraj Prasanth"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The high-level algorithm for Adaptive Rejection sampler (created from Section 2.2 of Gilks et al. (1992)):
+
+1) The x-value (x_mid) at the maximum of the logarithm of the density function in the domain is computed. Further, those x- values are computed where density function is about 10000 times less than the maximum density value. These values are taken as the lower and upper bounds of the domain, if the respective values are specified as -Inf and Inf by the user's input. This change is important because having Inf values can create NaNs during computations.
+
+2) The initial x-vector is created for k=6 with 3 abscissae between lower bound and x_mid and 3 abscissae between x_mid and upper bound.
+
+3) Checks put to ensure that x_mid is not a part of x_vector, because h'(x) goes into the denominator of computations and that would be 0 at x=x_ mid
+
+4) z-vector is computed from x-vector, u(x) is defined and I-vector is created by computing the integral of exp(u(x)) between every consecutive pair of z values. All of this is done exactly as mentioned in Gilks' paper. I-vector is then converted into cumulative sums of the integrals and divided by the total sum of the integrals (s) to create a cdf-like vector with increasing values from 0 to 1. 
+
+5) Next U1 and U2 are generated independently from Unif(0,1). U2 is w. U1 would fall between two consecutive values in the I-vector, let those values be I[j] and I[j+1]. This interval corresponds to the (z[j], z[j+1]) interval. Now,
+integral(u(x))dx between the limits z[j] and x*= U1-sI[j]. x* is unknown, so this integral expression is evaluated and inverted to obtain x*.
+
+6) l(x*) and u(x*) are computed. Then, if w <= exp { l(x*) - u(x*)}, x* is accepted and added to the sample. Else, if
+w < exp{h(x*) -u(x*)}, x* is accepted and also added to the x-vector, else x* is rejected and added to the x-vector. This is again all exactly as mentioned in the paper
+
+7) Go back to Step 3 and repeat Steps 3 to 7 till x* is accepted n times where n is the length of sample required from the density function

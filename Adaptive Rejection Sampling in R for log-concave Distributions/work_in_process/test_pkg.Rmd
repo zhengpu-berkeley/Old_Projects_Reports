@@ -1,0 +1,17 @@
+
+
+```{r}
+library(ars)
+```
+
+```{r}
+samples = ars(dnorm, 100000, x_domain = c(-5, 1), mean=-1, sd=2)
+```
+
+```{r}
+plt_vec = (-500:100)/100
+
+hist(samples, breaks=100, freq=FALSE)
+lines(plt_vec, dnorm(plt_vec, mean=-1, sd=2)/(pnorm(1, mean=-1,  sd=2) - pnorm(-5, mean=-1,  sd=2)))
+```
+
